@@ -1,6 +1,6 @@
 # Brave Origin Windows Unlocker
 
-A TypeScript utility for unlocking Brave Origin features on Windows by modifying
+A native C# (win-x64, compiled with Native AOT) utility for unlocking Brave Origin features on Windows by modifying
 the local application state.
 
 ## Overview
@@ -18,41 +18,35 @@ by Brave to store user preferences and license validation status.
 
 ## Requirements
 
-- **Deno** - Modern JavaScript/TypeScript runtime
 - **Windows OS** - Designed for Windows file paths
 - **Brave Origin** - The browser being modified
 - **File Write Permissions** - Access to `%LOCALAPPDATA%` directory
+- **.NET 8.0 SDK** - Only required to build the project (the built `BraveOriginUnlocker.exe` is completely standalone)
 
-## Installation
+## Quick Build & Run (C# Executable) 🚀
 
-1. Install [Deno](https://deno.land/) if you haven't already
-2. Clone this repository:
-   ```bash
-   git clone https://github.com/ObjectAscended/brave-origin-windows-unlocker.git
-   cd brave-origin-windows-unlocker
-   ```
+We've automated the build process to make it as simple as possible.
 
-## Pre-Bundled Deno Binaries 🎉
+1. **Build the Executable**:
+   - Double-click `build.bat` in Windows Explorer, OR
+   - Run the following in PowerShell:
+     ```powershell
+     .\build.ps1
+     ```
+   This script checks if you have the .NET 8.0 SDK installed (and offers to install it via `winget` if missing). It then compiles the C# source code using **Native AOT** (or falls back to a trimmed self-contained Single-File build if C++ build tools are missing) to output a highly optimized, zero-dependency `BraveOriginUnlocker.exe`.
 
-In our latest releases, we offer **pre-bundled Deno binaries** that make running
-the Windows unlocker easier than ever! 🚀 You can download them from our
-[latest release page](https://github.com/ObjectAscended/brave-origin-windows-unlocker/releases/latest).
-These binaries ensure a smooth setup and save you time, so you can focus on
-enjoying your experience without unnecessary hassle! 🕒
+2. **Run the Unlocker**:
+   - Simply run the generated `BraveOriginUnlocker.exe`:
+     ```cmd
+     .\BraveOriginUnlocker.exe
+     ```
 
 ## Why Run the Windows Unlocker Instead of WSL? 🤔
 
-Running the Windows unlocker natively is typically a better choice than running
-a browser inside WSL. Here's why:
+Running the Windows unlocker natively is typically a better choice than running a browser inside WSL:
 
-1. **Performance**: The native Windows experience generally offers better
-   performance than emulated environments like WSL. ⚡
-2. **Simplicity**: You avoid complex setups and configurations, making it more
-   straightforward for users of all levels. 🛠️
-3. **Compatibility**: Some features and functionalities might only work
-   seamlessly in a Windows environment, ensuring you get the most out of your
-   tools. 🔗
-4. **User Experience**: Enjoy a more intuitive interface and fewer problems
-   managing dependencies. 😊
+1. **Performance**: Native Windows executables offer optimal startup speed and memory efficiency. ⚡
+2. **Simplicity**: You avoid complex WSL setups and Windows-to-WSL file path translation. 🛠️
+3. **Zero Dependencies**: Once built, the native `BraveOriginUnlocker.exe` runs on any Windows machine without needing Deno, Node.js, or even a .NET runtime! 🔗
 
 Enjoy using our tool! 🎈
